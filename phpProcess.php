@@ -24,11 +24,11 @@ class fockClass {
             上面几个信号都可以用来终止一个进程
          */
         // 终止程序信号
-        pcntl_signal(SIGTERM, [__CLASS__, 'signalHandler'], false);
+        //pcntl_signal(SIGTERM, [__CLASS__, 'signalHandler'], false);
         // 终止程序运行信号
-        pcntl_signal(SIGINT, [__CLASS__, 'signalHandler'], false);
+        //pcntl_signal(SIGINT, [__CLASS__, 'signalHandler'], false);
         // 终止程序并生成转储核心文件
-        pcntl_signal(SIGQUIT, [__CLASS__, 'signalHandler'], false);
+        //pcntl_signal(SIGQUIT, [__CLASS__, 'signalHandler'], false);
         if(function_exists('gc_enable')) {
             // 开启gc垃圾回收机制（激活循环引用收集器）
             gc_enable();
