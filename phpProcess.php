@@ -121,16 +121,24 @@ class fockClass {
         }
     }
     /**
-     * [stop 终止进程运行]
+     * [stop 暂停程序运行]
      * @return [type] [description]
      */
     public function stop($name) {
         $this->_exec($name, SIGSTOP);
     }
+    /**
+     * [cont 恢复程序运行]
+     * @return [type] [description]
+     */
     public function cont($name) {
         $this->_exec($name, SIGCONT);
 
     }
+    /**
+     * [kill 终止进程运行]
+     * @return [type] [description]
+     */
     public function kill($name) {
         $this->_exec($name, SIGKILL);
     }
