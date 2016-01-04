@@ -74,7 +74,11 @@ class fockClass {
             } else if($pid == 0) { // 子进程运行体
                 $this->arrPid[$this->queue[$i]['name']] = getmypid();
                 if($this->queue[$i]['param']) {
-                    eval("call_user_func([\$this->queue[\$i]['obj'], \$this->queue[\$i]['name']], '"  . implode('\',\'', $this->queue[$i]['param']) . "');");
+                    call_user_func_array(
+                        [$this->queue[$i]['obj'], $this->queue[$i]['name']],
+                        $this->queue[$i]['param']
+                    );
+                    // eval("call_user_func([\$this->queue[\$i]['obj'], \$this->queue[\$i]['name']], '"  . implode('\',\'', $this->queue[$i]['param']) . "');");
                 } else {
                     call_user_func([$this->queue[$i]['obj'], $this->queue[$i]['name']]);
                 }
@@ -121,24 +125,16 @@ class fockClass {
         }
     }
     /**
-     * [stop 暂停程序运行]
+     * [stop 终止进程运行]
      * @return [type] [description]
      */
     public function stop($name) {
         $this->_exec($name, SIGSTOP);
     }
-    /**
-     * [cont 恢复程序运行]
-     * @return [type] [description]
-     */
     public function cont($name) {
         $this->_exec($name, SIGCONT);
 
     }
-    /**
-     * [kill 终止进程运行]
-     * @return [type] [description]
-     */
     public function kill($name) {
         $this->_exec($name, SIGKILL);
     }
